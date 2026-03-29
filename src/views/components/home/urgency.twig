@@ -1,0 +1,40 @@
+{# ================================================================
+   ⏰ URGENCY SECTION
+   ================================================================
+   Purpose: Create FOMO and drive immediate action
+   CRO: Countdown timer + scarcity messaging
+   Psychology: Loss aversion, time pressure
+   ================================================================ #}
+
+<section class="section-padding" style="background: var(--color-bg);">
+    <div class="container">
+        <div class="urgency-banner">
+            {# Urgency Title #}
+            <h2 class="urgency-title">🔥 العرض ينتهي اليوم!</h2>
+            <p class="urgency-subtitle">الكمية محدودة - لا تفوّت الفرصة</p>
+
+            {# Countdown Timer #}
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-hours">00</span>
+                    <span class="countdown-label">ساعة</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-minutes">00</span>
+                    <span class="countdown-label">دقيقة</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="countdown-seconds">00</span>
+                    <span class="countdown-label">ثانية</span>
+                </div>
+            </div>
+
+            {# CTA #}
+            <div style="margin-top: 24px; position: relative;">
+                <a href="/products" class="btn btn-primary btn-lg" style="background: #fbbf24; color: #1a1a1a;">
+                    اشتري الآن قبل انتهاء العرض
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

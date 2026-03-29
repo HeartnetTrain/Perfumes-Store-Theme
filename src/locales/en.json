@@ -1,27 +1,21 @@
 {
-  "blocks": {
-    "header": {
-      "cart": "Cart"
-    },
-    "appBanner": {
-      "download_now": "download now"
+    "common": {
+        "currency": "SAR",
+        "add_to_cart": "Add to Cart",
+        "buy_now": "Buy Now",
+        "shop_now": "Shop Now",
+        "view_all": "View All",
+        "read_more": "Read More",
+        "close": "Close",
+        "search": "Search",
+        "home": "Home",
+        "products": "Products",
+        "cart": "Cart",
+        "wishlist": "Wishlist",
+        "login": "Login",
+        "logout": "Logout",
+        "my_account": "My Account",
+        "contact_us": "Contact Us",
+        "about_us": "About Us"
     }
-  },
-  "pages": {
-    "cart": {
-      "cart_options": "Cart Options"
-    },
-    "order": {
-      "can_edit_or_delete_your_review_within": "You can edit or delete your review within",
-      "edit_period_ended": "The period to edit the review has ended",
-      "delete_period_ended": "The period to delete the review has ended",
-      "days_since_added": "days since it was added",
-      "option_name": "Option name",
-      "option_content": "Content"
-    }
-  },
-  "common": {
-    "bank_offer_sub_title_multiple": "Pay for your purchases via one of the following bank cards and get the specified discount",
-    "bank_offer_sub_title_single": "Pay for your purchases via :bank_name bank card and get discount"
-  }
 }

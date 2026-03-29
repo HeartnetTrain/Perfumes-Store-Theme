@@ -1,0 +1,61 @@
+{# ================================================================
+   💰 UPSELL / BUNDLE SECTION - CRITICAL FOR REVENUE
+   ================================================================
+   Purpose: Increase AOV with bundle offers
+   CRO: Visual price comparison, savings highlight, urgency
+   Psychology: Anchoring (show single price first), then bundle savings
+   ================================================================ #}
+
+<section class="section-padding" style="background: var(--color-bg);">
+    <div class="container">
+        <h2 class="section-title">عروض <span class="gold-gradient">حصرية</span></h2>
+        <p class="section-subtitle">وفّر أكثر عند شراء مجموعة</p>
+
+        <div class="bundle-section">
+            {# Offer Badge #}
+            <span class="bundle-badge">🔥 عرض خاص لفترة محدودة</span>
+
+            <h3 class="bundle-title">اشتري 2 واحصل على <span class="gold-text">خصم 30%</span></h3>
+            <p style="color: var(--color-text-muted); margin-bottom: 8px;">
+                اختر أي عطرين من مجموعتنا واحصل على خصم فوري
+            </p>
+
+            {# Visual Comparison: Single vs Bundle #}
+            <div class="bundle-comparison">
+                {# Single Option #}
+                <div class="bundle-option">
+                    <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 8px;">
+                        عطر واحد
+                    </p>
+                    <div class="bundle-price">٢٥٠ ر.س</div>
+                    <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 4px;">
+                        السعر العادي
+                    </p>
+                </div>
+
+                {# VS Divider #}
+                <div class="bundle-vs">VS</div>
+
+                {# Bundle Option (Highlighted) #}
+                <div class="bundle-option highlighted">
+                    <p style="font-size: 0.875rem; color: var(--color-primary); margin-bottom: 8px; font-weight: 700;">
+                        ⭐ عطرين معاً
+                    </p>
+                    <div class="bundle-price-old">٥٠٠ ر.س</div>
+                    <div class="bundle-price">٣٥٠ ر.س</div>
+                    <span class="bundle-savings">وفّر ١٥٠ ر.س</span>
+                </div>
+            </div>
+
+            {# CTA #}
+            <div style="text-align: center;">
+                <a href="/products" class="btn btn-primary btn-lg" style="min-width: 280px;">
+                    استفد من العرض الآن
+                </a>
+                <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 12px;">
+                    ⏰ العرض ساري حتى نفاد الكمية
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

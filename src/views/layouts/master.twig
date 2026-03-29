@@ -1,133 +1,117 @@
-{# ############## Shared Variables in all views ################
-| Variable                                           | Type     | Description                                                                                              |
-|----------------------------------------------------|----------|----------------------------------------------------------------------------------------------------------|
-| store                                              | Store    |                                                                                                          |
-| store.id                                           | int      |                                                                                                          |
-| store.name                                         | string   |                                                                                                          |
-| store.username                                     | string   |                                                                                                          |
-| store.description                                  | string   |                                                                                                          |
-| store.slogan                                       | ?string  | * if feature in twilight.json                                                                            |
-| store.logo                                         | string   |                                                                                                          |
-| store.url                                          | string   |                                                                                                          |
-| store.api                                          | string   | the api url for current store                                                                            |
-| store.icon                                         | string   | *fav icon url                                                                                            |
-| store.contacts                                     | object   | [mobile, phone, email, whatsapp, telegram], ex. store.contacts.email                                     |
-| store.social                                       | object   | [instagram, snapchat, twitter, youtube, facebook, pinterest, maroof, whatsapp], ex. store.social.twitter |
-| store.settings                                     | object   |                                                                                                          |
-| store.settings.auth.email_allowed                  | bool     |                                                                                                          |
-| store.settings.auth.mobile_allowed                 | bool     |                                                                                                          |
-| store.settings.auth.is_email_required              | bool     |                                                                                                          |
-| store.settings.cart.apply_coupon_enabled           | bool     | Does visitor allowed to applay coupon in cart page                                                       |
-| store.settings.product.total_sold_enabled          | bool     |                                                                                                          |
-| store.settings.product.fit_type                    | ?string  | null when equal product card size is off, or ['cover', 'contain']                                        |
-| store.settings.category.testimonial_enabled        | bool     | Show random testimonials in category page                                                                |
-| store.settings.tax.number                          | ?string  |                                                                                                          |
-| store.settings.tax.certificate                     | ?string  | certificate image url                                                                                    |
-| store.settings.tax.taxable_prices_enabled          | bool     | Does tax included in the prices ex product_price 100 & tax is 15, price will be 115                      |
-| store.settings.rating_enabled                      | bool     | Is one of: store_enabled or shipping_enabled or products_enabled                                         |
-| store.settings.arabic_numbers_enabled              | bool     | Does the merchant wants the numbers to be shown as Arabic format                                         |
-| store.settings.is_multilingual                     | bool     |                                                                                                          |
-| store.settings.currencies_enabled                  | bool     |     
-| theme                                              | Theme    |                                                                                                          |
-| theme.id                                           | int      |                                                                                                          |
-| theme.name                                         | string   |                                                                                                          |
-| theme.mode                                         | string   | `live`, `preview`                                                                                        |
-| theme.is_rtl                                       | bool     |                                                                                                          |
-| theme.translations_hash                            | int      | to be used in case merchant updated frontend store translations                                          |
-| theme.color                                        | object   |                                                                                                          |
-| theme.color.primary                                | string   |                                                                                                          |
-| theme.color.text                                   | string   | suitable text color comparing to `theme.primary.color`, #000000, #FFFFFF                                 |
-| theme.color.reverse_primary                        | string   |                                                                                                          |
-| theme.color.reverse_text                           | string   | if `theme.text_color=#000000` means that `theme.reverse_text_color=#FFFFFF`                              |
-| theme.color.is_dark                                | bool     | Does main store color `theme.primary.color` considered as dim color?                                     |
-| theme.color.darker(float alpha, ?string hexColor)  | string   | get darker color from `theme.primary.color` or from passed color, `alpha` range from 0.0-1.0             |
-| theme.color.lighter(float alpha, ?string hexColor) | string   | get lighter color from `theme.primary.color` or from passed color, `alpha` range from 0.0-1.0            |
-| theme.font                                         | ?object  | Salla predefined font, null when the theme doesn't have `fonts` feature                                  |
-| theme.font.name                                    | string   | DINNextLTArabic-Regular, Amazon-Ember, Apple, Dubai, Estedad                                             |
-| theme.font.url                                     | string   | css full url ex: 'https://my_store.test/dist/fonts/default.css'                                          |
-| theme.settings                                     | object   | dynamic object with values of the `settings` in twilight.json ex. `theme.settings.topnav_is_dark`        |
-| theme.settings.set(settingName, value)             | string   | set global var, then get it {{theme.settings.get('my_var','fallback') }}                                 |
-| theme.settings.get(settingName, default=null)      | mixed    | get theme setting ex `theme.settings.get('my_var', 'fallback')`                                          |
-#}
+{# ================================================================
+   🏪 SALLA PREMIUM PERFUME THEME - Master Layout
+   ================================================================
+   Luxury perfume e-commerce theme optimized for Saudi market
+   - Mobile-first responsive design
+   - Full RTL (Arabic-first) support
+   - High-conversion focused layout
+   - Black & Gold luxury color scheme
+   ================================================================ #}
+
+{{ theme.settings.set('placeholder', 'images/placeholder.png') }}
+
 <!DOCTYPE html>
-<html lang="{{ user.language.code }}" dir="{{ user.language.dir }}">
-<!-- بسم الله الرحمن الرحيم -->
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{ theme.settings.set('placeholder', 'images/placeholder.png') }}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="description" content="{{ store.description }}">
+    
+    <title>{{ page.title }} | {{ store.name }}</title>
+    
+    <link rel="icon" href="{{ store.icon }}">
+    
+    {# Font - Premium Arabic Typography #}
+    {% if theme.font %}
+        <link rel="stylesheet" href="{{ theme.font.url }}">
+    {% else %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    {% endif %}
 
-    <script defer data-cfasync="false" crossorigin="anonymous" src="{{ 'product-card.js'|asset }}"></script>
-    <script defer src="{{ 'main-menu.js'|asset }}"></script>
+    {# Theme Primary Color CSS Variables #}
+    <style>
+        :root {
+            --color-primary: {{ theme.color.primary|default('#c8a45c') }};
+            --color-primary-dark: {{ theme.color.darker(0.2)|default('#a88a3c') }};
+            --color-primary-light: {{ theme.color.lighter(0.3)|default('#dfc88a') }};
+            --color-text: {{ theme.color.text|default('#ffffff') }};
+            --color-bg: #0a0a0a;
+            --color-bg-secondary: #141414;
+            --color-bg-card: #1a1a1a;
+            --color-border: #2a2a2a;
+            --color-text-muted: #888888;
+            --color-success: #22c55e;
+            --color-white: #ffffff;
+            --font-family: {% if theme.font %}'{{ theme.font.name }}'{% else %}'Tajawal'{% endif %}, sans-serif;
+        }
+    </style>
+    
+    {# Main Stylesheet #}
+    <link rel="stylesheet" href="{{ 'assets/styles/app.css' | asset }}">
+    
     {% if theme.settings.get('enable_add_product_toast', true) %}
-        <script defer src="{{ 'add-product-toast.js'|asset }}"></script>
+        <salla-product-card-toast></salla-product-card-toast>
     {% endif %}
 
     {% block head_scripts %}{% endblock %}
-
-
-    <script data-cfasync="false">
-        window.header_is_sticky = "{{theme.settings.get('header_is_sticky', 'Default Value')}}"
-        window.imageZoom = "{{theme.settings.get('imageZoom')}}"
-        window.can_access_wallet = {{ user.can_access_wallet | json_encode }}
-        window.enable_more_menu = "{{ theme.settings.get('enable_more_menu', true) }}"
-        window.enable_add_product_toast = "{{ theme.settings.get('enable_add_product_toast', true) }}"
-    </script>
     
     {% hook 'head:start' %}
     {% hook head %}
     {% block styles %}{% endblock %}
-    <link rel="stylesheet" href="{{ 'app.css' | asset }}">
-    <link rel="stylesheet" href="{{ theme.font.path|cdn }}"/>
-    <link rel="stylesheet" href="{{ 'fonts/sallaicons.css'|cdn }}"/>
     
-    <style>
-        :root {
-            --font-main: '{{theme.font.name}}';
-            --color-primary: {{ theme.color.primary }};
-            --color-primary-dark: {{ theme.color.darker(0.15) }};
-            --color-primary-light: {{ theme.color.lighter(0.15) }};
-            --color-primary-reverse: {{ theme.color.reverse_text }};
-        }
-    </style>
-    {# tracking services, custom css feature. #}
+    {# Tracking services, custom CSS #}
     {% hook 'head:end' %}
 </head>
-<body id="app" class="theme-raed overflow-x-hidden {% hook 'body:classes' %}
-  {{ theme.settings.get('footer_is_dark') ? ' footer-is-dark' : ' footer-is-light' }}
-  {{ theme.settings.get('topnav_is_dark') ? ' topnav-is-dark' : '' }}
-  {{ theme.settings.get('sticky_add_to_cart') ? ' is-sticky-product-bar' : '' }}
-  ">
-<noscript>
-    To get full functionality of this site you need to enable JavaScript. Here is how
-    <a href="https://www.enable-javascript.com/" rel="noreferrer"
-       target="_blank">To enable JavaScript on webpage</a>.
-</noscript>
-<div class="app-inner flex flex-col min-h-full">
+
+<body class="perfume-theme font-primary bg-body text-white antialiased">
     {% hook 'body:start' %}
+    
+    {# ===== HEADER ===== #}
     {% component 'header.header' %}
-    <main id="main-content" role="main">
-    {% block content %}{% endblock %}
+    
+    {# ===== MAIN CONTENT ===== #}
+    <main id="main-content">
+        {% block content %}{% endblock %}
     </main>
+    
+    {# ===== FOOTER ===== #}
     {% component 'footer.footer' %}
-</div>
-{% hook 'body:end' %}
-{% if theme.settings.get('enable_add_product_toast', true) %}
-    <salla-add-product-toast></salla-add-product-toast>
-{% endif %}
-<script defer crossorigin="anonymous" src="{{ 'app.js' | asset }}"></script>
-
-{# Twilight Components #}
-<salla-offer-modal></salla-offer-modal>
-<salla-search></salla-search>
-
-{% if user.type=='guest' %}
-    <salla-login-modal></salla-login-modal>
-{% endif %}
-{% if store.scope %}
-    <salla-scopes selection="{{ store.scope.display_as == 'popup' ? 'mandatory' : 'optional' }}"></salla-scopes>
-{% endif %}
-{% block scripts %}{% endblock %}
+    
+    {# ===== FLOATING WHATSAPP BUTTON (Sticky) ===== #}
+    {% if store.contacts.whatsapp %}
+    <a href="https://wa.me/{{ store.contacts.whatsapp }}?text={{ 'مرحبا، أريد الاستفسار عن هذا المنتج'|url_encode }}" 
+       target="_blank"
+       rel="noopener noreferrer"
+       class="whatsapp-float"
+       aria-label="تواصل معنا عبر واتساب">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.917 1.04 5.591 2.77 7.67L.96 24l4.478-1.77A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6c-2.252 0-4.336-.744-6.018-2.002l-.43-.318-2.66 1.05.892-2.584-.35-.457A9.544 9.544 0 012.4 12c0-5.302 4.298-9.6 9.6-9.6 5.302 0 9.6 4.298 9.6 9.6 0 5.302-4.298 9.6-9.6 9.6z"/>
+        </svg>
+        <span class="whatsapp-text">تواصل معنا</span>
+    </a>
+    {% endif %}
+    
+    {% hook 'body:end' %}
+    
+    {% if theme.settings.get('enable_add_product_toast', true) %}
+        <salla-product-card-toast position="bottom-start"></salla-product-card-toast>
+    {% endif %}
+    
+    {# Twilight Components #}
+    <salla-search-component></salla-search-component>
+    
+    {% if user.type == 'guest' %}
+        <salla-login-modal></salla-login-modal>
+    {% endif %}
+    
+    {% if store.scope %}
+        <salla-scopes></salla-scopes>
+    {% endif %}
+    
+    {% block scripts %}{% endblock %}
 </body>
 </html>
